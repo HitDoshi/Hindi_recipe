@@ -1,22 +1,22 @@
 class DataNode{
 
-  final int? id ;
-  final String title;
-  final String subtitle;
+  final String name;
+  final String sahitya;
+  final String kruti;
 
-  DataNode({this.id,required this.title,required this.subtitle});
+  DataNode({required this.name,required this.sahitya,required this.kruti});
 
   DataNode.fromMap(Map<String , dynamic> res) :
-  id = res['id'],
-  title = res['title'],
-  subtitle =res['subtitle'];
+  name = res['name'],
+  sahitya = res['sahitya'],
+  kruti = res['kruti'];
 
   Map<String,Object?> toMap(){
 
     return{
-      'id'  : id ,
-      'title' : title,
-      'subtitle' : subtitle
+      'name' : name,
+      'sahitya' : sahitya,
+      'kruti' : kruti
     };
   }
 

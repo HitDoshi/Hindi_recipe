@@ -1,3 +1,4 @@
+/*
 import 'dart:io';
 
 import 'package:flutter/services.dart';
@@ -33,8 +34,10 @@ class DBHandler{
 
     io.Directory documentDirectory = await getApplicationDocumentsDirectory();
     //String path = join(documentDirectory.path,"note");
-    /*var db = await openDatabase(path,version: 1,onCreate : _onCreate);
-    return db;*/
+    */
+/*var db = await openDatabase(path,version: 1,onCreate : _onCreate);
+    return db;*//*
+
 
     //var databasePath = await getDatabasesPath();
     String path = join(documentDirectory.path,_databaseName);
@@ -83,6 +86,77 @@ class DBHandler{
     print("Add");
 
     return dataNode;
+  }
+
+}
+*/
+
+import 'dart:io';
+
+import 'package:flutter/services.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart';
+import 'dart:io' as io;
+
+import '../utils/datanode.dart';
+
+class DBHandler{
+
+  static Database? _db;
+
+  Future<Database?> get db async{
+
+    print("hi");
+
+    if(_db!=null){
+      print("DB Exist");
+      return _db;
+    }
+
+    _db = await initDb();
+    return _db;
+  }
+
+    initDb() async{
+
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath,"recipe.db");
+    final exist = await databaseExists(path);
+
+    if(exist){
+      print("DB Exist");
+    }
+    else{
+
+      print("Copying DB");
+
+      try{
+        await Directory(dirname(path)).create(recursive:true);
+      }catch(_){}
+
+      ByteData data  = await rootBundle.load(join("assets/database","recipe.db"));
+      List<int> bytes = data.buffer.asUint8List(data.offsetInBytes,data.lengthInBytes);
+
+      await File(path).writeAsBytes(bytes,flush: true);
+      print("db copied");
+    }
+    return await openDatabase(path,version: 1);
+
+  }
+
+  Future<List<DataNode>> getData(int type_id) async{
+
+    var dbClient = await db;
+    List<Map> list = await dbClient!.rawQuery("SELECT * FROM recipe WHERE type_id="+type_id.toString());
+    List<DataNode> readData = [];
+    for(int i=0;i<list.length;i++)
+      {
+        readData.add(DataNode(name: list[i]['name'],sahitya: list[i]['sahitya'],kruti: list[i]['kruti']));
+        //print(list[i]['name']);
+      }
+    print("DB${readData.length}");
+    return readData;
   }
 
 }

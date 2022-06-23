@@ -25,7 +25,6 @@ class _HomePageState extends State<HomePage> {
                  fit: BoxFit.fill),
            ),
 
-
            child: TextButton(
               child: const Text("प्रवेश",style: TextStyle(backgroundColor: Colors.green),),
               onPressed: () {

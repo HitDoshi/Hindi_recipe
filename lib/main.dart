@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hindi_recipe/pages/listRecipes.dart';
+import 'package:hindi_recipe/pages/listRecipesType.dart';
 import 'package:hindi_recipe/pages/homepage.datr.dart';
 import 'package:hindi_recipe/pages/listitem.dart';
 import 'package:hindi_recipe/utils/routes.dart';
@@ -15,6 +15,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
+      debugShowCheckedModeBanner: false,
+
       title: 'Flutter Demo',
       theme: ThemeData(
 
