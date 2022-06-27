@@ -1,10 +1,13 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:hindi_recipe/database/FavDBHandler.dart';
 import 'package:hindi_recipe/pages/listitem.dart';
 import 'package:hindi_recipe/utils/datanode.dart';
+import 'package:hindi_recipe/utils/favmodel.dart';
 import 'package:hindi_recipe/utils/routes.dart';
 import '../database/DBHandler.dart';
+import 'favItemDisplay.dart';
 
 class ListRecipes extends StatefulWidget {
   const ListRecipes({Key? key}) : super(key: key);
@@ -16,13 +19,16 @@ class ListRecipes extends StatefulWidget {
 class _ListRecipesState extends State<ListRecipes> {
 
   DBHandler? dbHandler;
+  FavDBHandler? favDBHandler;
   List<DataNode> readData = [];
+  List<FavModel> readFavData = [];
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     dbHandler = DBHandler();
+    favDBHandler = FavDBHandler();
     print("Hello");
   }
 
@@ -42,6 +48,21 @@ class _ListRecipesState extends State<ListRecipes> {
 
       appBar: AppBar(
         title: const Text("हिंदी रेसिपीज"),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              readFavData = await favDBHandler!.readData();
+
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) =>
+                      FavItemDisplay(favData: readFavData)
+                  ));
+            },
+            icon: Padding(padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+            child: Image.asset("assets/images/fav.png",)),
+
+          )
+        ],
       ),
 
       body: Padding(

@@ -69,6 +69,7 @@ class _ListItemState extends State<ListItem> {
                     readFavData = (await favDBHandler!.readData());
 
                     print(readFavData.length.toString());
+                    temp  = 0;
 
                     for(int i=0;i<readFavData.length;i++){
 
@@ -77,19 +78,22 @@ class _ListItemState extends State<ListItem> {
                       print(readFavData[i].row_id.toString());
                       print(index+1);
 */
-                      if(readFavData[i].type_id.toString()==(widget.type_id +1).toString()&& readFavData[i].row_id.toString()==(index+1).toString()){
+                      if((readFavData[i].type_id.toString()==(widget.type_id +1).toString()) &&
+                          (readFavData[i].row_id.toString()==(index+1).toString())) {
                         temp = readFavData[i].fav;
                         id = readFavData[i].id!;
-                        print("Enter");
+                        print("listitem enter");
                       }
                     }
 
-                        Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) =>
-                            DisplayRecipe(type_id: widget.type_id + 1, row_id: index + 1,
-                              recipe_name: widget.list[index].name ,
-                              recipe_image: imaegItem[widget.type_id][0], sahitya:widget.list[index].sahitya,
-                              kruti: widget.list[index].kruti,fav: temp,fav_id: id,)));
+                      print("$temp");
+
+                      Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context) =>
+                          DisplayRecipe(type_id: widget.type_id + 1, row_id: index + 1,
+                            recipe_name: widget.list[index].name ,
+                            recipe_image: imaegItem[widget.type_id][0], sahitya:widget.list[index].sahitya,
+                            kruti: widget.list[index].kruti,fav: temp,fav_id: id,)));
                   },
 
                     leading: ClipRRect(

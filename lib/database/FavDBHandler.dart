@@ -54,11 +54,11 @@ class FavDBHandler {
     return queryResult.map((e) => FavModel.fromMap(e)).toList() ;
   }
 
-  Future<int> delete(int id) async{
+  Future<int> delete(String type_id,String row_id) async{
 
     var dbClient = await favdb;
-    //print("Delete-$id");
-    return await dbClient!.delete('fav',where: 'id=?',whereArgs: [id]);
+    print("Delete-$type_id $row_id");
+    return await dbClient!.delete('fav',where: 'type_id=? and row_id=?',whereArgs: [type_id,row_id]);
   }
 
   Future<int> update(FavModel favModel) async{
