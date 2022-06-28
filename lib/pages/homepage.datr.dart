@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hindi_recipe/database/DBHandler.dart';
+import 'package:hindi_recipe/pages/BlinkAnimation.dart';
 import 'package:hindi_recipe/utils/routes.dart';
 
 class HomePage extends StatefulWidget {
@@ -25,15 +26,17 @@ class _HomePageState extends State<HomePage> {
                  fit: BoxFit.fill),
            ),
 
-           child: TextButton(
+           /*child: TextButton(
               child: const Text("प्रवेश",style: TextStyle(backgroundColor: Colors.green),),
               onPressed: () {
                 Navigator.pushNamed(context, MyRoutes.listRecipes);
               },
 
-           )
+           )*/
+       child: MyBlinkingButton(),
     )
     );
 
   }
 }
+

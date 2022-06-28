@@ -51,128 +51,63 @@ class _DisplayRecipeState extends State<DisplayRecipe> {
       appBar: AppBar(
         title: Text(widget.recipe_name),
         actions: [
-          Column(
-            children: [
-              IconButton(
-                  onPressed: () async {
+          Padding(padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
+          child:IconButton(
+              onPressed: () async {
 
-                    print("press");
-                    readFavData = (await favDBHandler!.readData());
-                    print("fa==${readFavData.length.toString()}");
+                print("press");
+                readFavData = (await favDBHandler!.readData());
+                print("fa==${readFavData.length.toString()}");
 
-                    for(int i=0;i<readFavData.length;i++){
+                for(int i=0;i<readFavData.length;i++){
 
-                      print("${readFavData[i].type_id} ${widget.type_id.toString()} "
-                          "${readFavData[i].row_id.toString()} ${widget.row_id.toString()}");
-                      /*print(widget.type_id.toString());
-                    print(readFavData[i].row_id.toString());
-                    print(widget.row_id.toString());
+                  print("${readFavData[i].type_id} ${widget.type_id.toString()} "
+                      "${readFavData[i].row_id.toString()} ${widget.row_id.toString()}");
+                  /*print(widget.type_id.toString());
+                  print(readFavData[i].row_id.toString());
+                  print(widget.row_id.toString());
 */
-                      if( (readFavData[i].type_id.toString()==widget.type_id.toString())
-                          && (readFavData[i].row_id.toString()==widget.row_id.toString()) ) {
+                  if( (readFavData[i].type_id.toString()==widget.type_id.toString())
+                      && (readFavData[i].row_id.toString()==widget.row_id.toString()) ) {
 
-                        f = readFavData[i].fav;
-                        t_id = readFavData[i].type_id;
-                        r_id = readFavData[i].row_id;
-
-
-                        print("f=$f");
-                      }
-                    }
-
-                    if(f==1) {
-                      print("delete");
-                      favDBHandler!.delete(t_id,r_id);
-                      f=0;
-                      setState(() {
-                        star = "assets/images/stargray.png";
-                      });
-                    }
-                    else{
-                      print("f=$f");
-
-                      await favDBHandler?.insert(FavModel(
-                          type_id: (widget.type_id).toString(),
-                          row_id: (widget.row_id).toString(),
-                          name: widget.recipe_name,
-                          sahitya: widget.sahitya,
-                          kruti: widget.kruti,
-                          fav: 1)
-                      ).then((value) =>
-                          print("Inserted ${widget.recipe_name}")).
-                      onError((error, stackTrace) =>
-                          print(error.toString()));
-                      //widget.fav = 1;
-                      setState(() {
-                        star = "assets/images/starred.png";
-                      });
-                    }
-                  },
-                  icon: Image.asset(star,)
-              ),
-              IconButton(
-                  onPressed: () async {
-                    print("Share");
-                  },
-                  icon: Image.asset("assets/images/share.png",)),
-            ],
-           /* child: IconButton(
-                onPressed: () async {
-
-                  print("press");
-                  readFavData = (await favDBHandler!.readData());
-                  print("fa==${readFavData.length.toString()}");
-
-                  for(int i=0;i<readFavData.length;i++){
-
-                    print("${readFavData[i].type_id} ${widget.type_id.toString()} "
-                        "${readFavData[i].row_id.toString()} ${widget.row_id.toString()}");
-                    *//*print(widget.type_id.toString());
-                    print(readFavData[i].row_id.toString());
-                    print(widget.row_id.toString());
-*//*
-                    if( (readFavData[i].type_id.toString()==widget.type_id.toString())
-                        && (readFavData[i].row_id.toString()==widget.row_id.toString()) ) {
-
-                      f = readFavData[i].fav;
-                      t_id = readFavData[i].type_id;
-                      r_id = readFavData[i].row_id;
+                    f = readFavData[i].fav;
+                    t_id = readFavData[i].type_id;
+                    r_id = readFavData[i].row_id;
 
 
-                      print("f=$f");
-                    }
-                  }
-
-                  if(f==1) {
-                    print("delete");
-                    favDBHandler!.delete(t_id,r_id);
-                    f=0;
-                    setState(() {
-                      star = "assets/images/stargray.png";
-                    });
-                  }
-                  else{
                     print("f=$f");
-
-                    await favDBHandler?.insert(FavModel(
-                        type_id: (widget.type_id).toString(),
-                        row_id: (widget.row_id).toString(),
-                        name: widget.recipe_name,
-                        sahitya: widget.sahitya,
-                        kruti: widget.kruti,
-                        fav: 1)
-                    ).then((value) =>
-                        print("Inserted ${widget.recipe_name}")).
-                    onError((error, stackTrace) =>
-                        print(error.toString()));
-                    //widget.fav = 1;
-                    setState(() {
-                      star = "assets/images/starred.png";
-                    });
                   }
-                },
-                icon: Image.asset(star,)),*/
+                }
 
+                if(f==1) {
+                  print("delete");
+                  favDBHandler!.delete(t_id,r_id);
+                  f=0;
+                  setState(() {
+                    star = "assets/images/stargray.png";
+                  });
+                }
+                else{
+                  print("f=$f");
+
+                  await favDBHandler?.insert(FavModel(
+                      type_id: (widget.type_id).toString(),
+                      row_id: (widget.row_id).toString(),
+                      name: widget.recipe_name,
+                      sahitya: widget.sahitya,
+                      kruti: widget.kruti,
+                      fav: 1)
+                  ).then((value) =>
+                      print("Inserted ${widget.recipe_name}")).
+                  onError((error, stackTrace) =>
+                      print(error.toString()));
+                  //widget.fav = 1;
+                  setState(() {
+                    star = "assets/images/starred.png";
+                  });
+                }
+              },
+              icon: Image.asset(star,))
           ),
         ],
       ),

@@ -42,7 +42,7 @@ class _FavItemDisplayState extends State<FavItemDisplay> {
 
     return Scaffold (
       appBar: AppBar(
-        title: Text("Favourite List"),
+        title: const Text("मनपसंद रेसिपी"),
       ),
 
 
