@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
 
      body:Container(
 
-           constraints: BoxConstraints.expand(),
+           constraints: const BoxConstraints.expand(),
            decoration: const BoxDecoration(
              image: DecorationImage(
                  image: AssetImage("assets/images/chief.webp"),
@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
               },
 
            )*/
-       child: MyBlinkingButton(),
+       child: const MyBlinkingButton(),
     )
     );
 

@@ -107,7 +107,6 @@ class _ListRecipesState extends State<ListRecipes> {
         body: Padding(
           padding: const EdgeInsets.all(15),
           child: GridView.builder(
-
                 itemCount: items.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2),

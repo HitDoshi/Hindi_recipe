@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../utils/routes.dart';
 
 class MyBlinkingButton extends StatefulWidget {
+  const MyBlinkingButton({Key? key}) : super(key: key);
+
   @override
   _MyBlinkingButtonState createState() => _MyBlinkingButtonState();
 }
@@ -15,7 +15,7 @@ class _MyBlinkingButtonState extends State<MyBlinkingButton>
   @override
   void initState() {
     _animationController =
-    new AnimationController(vsync: this, duration: Duration(seconds: 1));
+    AnimationController(vsync: this, duration: Duration(seconds: 1));
     _animationController.repeat(reverse: true);
     super.initState();
   }
@@ -25,7 +25,7 @@ class _MyBlinkingButtonState extends State<MyBlinkingButton>
     return FadeTransition(
       opacity: _animationController,
           child: OutlinedButton(
-            style: TextButton.styleFrom(alignment: Alignment.topCenter,padding: EdgeInsets.all(100)),
+            style: TextButton.styleFrom(alignment: Alignment.topCenter,padding: const EdgeInsets.all(100)),
             onPressed: () {
               Navigator.pushNamed(context, MyRoutes.listRecipes);
             },
@@ -37,7 +37,9 @@ class _MyBlinkingButtonState extends State<MyBlinkingButton>
               height: 50,
               width: 80,
                 child: const Padding(padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
-                child: Text("प्रवेश",style: TextStyle(fontSize: 18),textAlign: TextAlign.center,))),
+                child: Text("प्रवेश",style: TextStyle(fontSize: 18),textAlign: TextAlign.center,)
+                )
+            ),
           ),
     );
   }
